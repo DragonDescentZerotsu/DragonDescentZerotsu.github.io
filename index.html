@@ -15,10 +15,20 @@
     
     <!-- FontAwesome JS -->
     <script defer src="assets/fontawesome/js/all.js"></script>
+<!--    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121223301-2"></script>-->
+<!--    <script>-->
+<!--        window.dataLayer = window.dataLayer || [];-->
+<!--        function gtag(){dataLayer.push(arguments);}-->
+<!--		gtag('js', new Date());-->
+
+<!--		gtag('config', 'UA-121223301-2');-->
+<!--    </script>-->
+
     
     <!-- Global CSS -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">  
-    
+<!--    <link rel="stylesheet" href="assets/css/main.css" /> &lt;!&ndash;我自己加的&ndash;&gt;-->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+
     <!-- github calendar css -->
     <link rel="stylesheet" href="assets/plugins/github-calendar/dist/github-calendar-responsive.css">
     <!-- github activity css -->  
@@ -71,9 +81,13 @@
                         <h2 class="heading">Basic Information</h2>
                         <div class="content">
                             <ul class="list-unstyled">
-                                <li class="introduction"><i class="fas fa-university"></i><a href="https://www.usnews.com/education/best-global-universities/huazhong-university-of-science-technology-505190" target="_blank">         University : Huazhong University of Science and Technology</a></li> <!--//fa-id-card-->
+                                <li class="introduction"><i class="fas fa-university"></i>         University : Huazhong University of Science and Technology <a href="https://www.usnews.com/education/best-global-universities/huazhong-university-of-science-technology-505190" target="_blank">(rank)</a></li> <!--//fa-id-card-->
                                 <li class="introduction"><i class="fa fa-cogs"></i>        Major : Artificial Intelligence</li>
+<<<<<<< HEAD
+                                <li class="introduction"><i class="fas fa-certificate"></i>         GPA : 93.8/100 ; 3.97/4 <a href="my_assets\电子成绩单英文.pdf" target="_blank">(transcript pdf)</a></li>
+=======
                                 <li class="introduction"><i class="fas fa-certificate"></i><a href="my_assets\电子成绩单英文.pdf" target="_blank">         GPA : 93.8/100 ; 3.97/4</a></li>
+>>>>>>> origin/main
                                 <li class="introduction"><i class="fas fa-signal"></i>        Rank : 2</li>
                                 <li class="introduction"><i class="fas fa-certificate"></i>         TOFEL : 109     GRE : 325</li>
                             </ul>
@@ -95,6 +109,44 @@
                             </ul>
                         </div><!--//content-->
                     </div><!--//section-inner-->               
+                </section><!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner shadow-sm rounded">
+                        <h2 class="heading">Research Experience</h2>
+                        <div>
+                            <ul>
+                                <li style="font-family: 'Segoe UI', sans-serif;"><b>Machine Learning and Computational Biology Group (IIIS), Research Intern &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Sep 2023 - now</b></li>
+                                I am working with <a href="http://group.iiis.tsinghua.edu.cn/~compbio/">Machine Learning and Computational Biology Group (IIIS)</a> on protein-protein interaction predictions and de novo protein design strategies, under the mentorship of Prof. Jianyang Zeng.
+                                <li style="font-family: 'Segoe UI', sans-serif;"><b>University of California, Irvine, Research Intern &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;June 2023 - Sep 2023</b></li>
+                                I worked with <a href="https://www.ics.uci.edu/~xhx/">Prof. Xiaohui Xie</a> at ICS on inventing novel data-efficient few-shot learning approach for Medical Image Segmentation with Segment Anything Model (SAM).
+                                <li style="font-family: 'Segoe UI', sans-serif;"><b>Huazhong University of Science and Technology, Research Intern &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;June 2022 - Aug 2022</b></li>
+                                I worked with <a href="https://lab.bciml.cn/en/home/">Brain-Computer Interface and Machine Learning Lab</a> on designing fast and reliable EEG-based Motor Imagine algorithms for Brain Computer Interfaces, under the mentorship of Prof. Dongrui Wu.
+                            </ul>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->
+                </section><!--//section-->
+
+                <section class="about section">
+                    <div class="section-inner shadow-sm rounded">
+                        <h2 class="heading">Publications</h2>
+                        <div class="content">
+                            <div style="display: flex;align-items: center;">
+                                <div style="width: 46%; margin-right: 2%; text-align: left;">
+                                    <img src="my_assets/images/SAM.png" alt="Tianang Leng" style="width: 100%;height: auto;">
+                                    <br>
+                                    <a href="my_assets/images/SAM.png" target="_blank">  [Full Image]</a>
+                                </div>
+                                <div style="width: 54%;">
+                                    <h6>Self-Sampling Meta SAM: Enhancing Few-shot Medical Image Segmentation with Meta-Learning</h6>
+                                    <p>	Here we introduce a novel relational multi-task learning setting where test data point may present auxiliary task labels. We develop MetaLink, where our key innovation is to build a knowledge graph that connects data points and tasks and thus allows us to leverage labels from auxiliary tasks.
+                                        <br>
+                                        [<a href="https://arxiv.org/pdf/2308.16466.pdf"><font color="#6F9FD8">PDF</font></a>]&nbsp;[<a href="https://github.com/snap-stanford/GraphGym"><font color="#6F9FD8">Code</font></a>]
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!--//content-->
+                    </div><!--//section-inner-->
                 </section><!--//section-->
 
                 <section class="projects section">
