@@ -28,7 +28,7 @@
             --surface: #ffffff;
             --surface-soft: #f2f2f6;
             --surface-strong: #e8e8ee;
-            --glass: rgba(255, 255, 255, 0.74);
+            --glass: rgba(255, 255, 255, 0.82);
             --text: #1d1d1f;
             --text-soft: #5f6368;
             --text-faint: #86868b;
@@ -40,18 +40,12 @@
             --violet: #8e5cf7;
             --warm: #f5a623;
             --danger: #e0245e;
-            --shadow: 0 18px 50px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 28px 70px rgba(0, 0, 0, 0.16);
-            --radius: 8px;
+            --shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 18px 48px rgba(0, 0, 0, 0.1);
+            --radius: 26px;
+            --radius-inner: 18px;
             --max: 1180px;
-            --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-            --hero-copy-y: 0px;
-            --hero-copy-opacity: 1;
-            --portrait-y: 0px;
-            --portrait-scale: 1;
-            --portrait-zoom: 1.06;
-            --portrait-img-y: 0px;
-            --nav-progress: 0%;
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         html[data-theme="dark"] {
@@ -60,7 +54,7 @@
             --surface: #111113;
             --surface-soft: #19191d;
             --surface-strong: #27272d;
-            --glass: rgba(18, 18, 20, 0.74);
+            --glass: rgba(18, 18, 20, 0.84);
             --text: #f5f5f7;
             --text-soft: #b8b8bf;
             --text-faint: #8e8e96;
@@ -71,7 +65,7 @@
             --accent-soft: #10243a;
             --violet: #bf5af2;
             --shadow: 0 18px 60px rgba(0, 0, 0, 0.52);
-            --shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.72);
+            --shadow-hover: 0 20px 54px rgba(0, 0, 0, 0.42);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -83,13 +77,16 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-optical-sizing: auto;
+            font-synthesis: none;
             background: var(--bg);
             color: var(--text);
             line-height: 1.5;
+            letter-spacing: normal;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            text-rendering: geometricPrecision;
-            transition: background 0.4s ease, color 0.4s ease;
+            text-rendering: optimizeLegibility;
+            transition: background 0.28s ease, color 0.28s ease;
         }
 
         img, video { max-width: 100%; }
@@ -118,29 +115,16 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            backdrop-filter: saturate(180%) blur(22px);
-            -webkit-backdrop-filter: saturate(180%) blur(22px);
-            background: var(--glass);
+            isolation: isolate;
+            background: var(--bg);
             border-bottom: 1px solid transparent;
             transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
         }
 
-        .nav::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -1px;
-            height: 1px;
-            background: var(--text);
-            transform: scaleX(var(--nav-progress));
-            transform-origin: left;
-            opacity: 0.18;
-        }
-
         .nav.nav-scrolled {
+            background: var(--bg);
             border-color: var(--line);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.045);
         }
 
         .nav-inner {
@@ -257,9 +241,7 @@
         }
 
         .hero-copy {
-            transform: translate3d(0, var(--hero-copy-y), 0);
-            opacity: var(--hero-copy-opacity);
-            will-change: transform, opacity;
+            transform: translate3d(0, 0, 0);
         }
 
         .hero-eyebrow {
@@ -285,9 +267,10 @@
             color: var(--text);
             font-size: 6.3rem;
             font-weight: 800;
-            letter-spacing: 0;
+            letter-spacing: -0.032em;
             line-height: 0.93;
             margin-bottom: 24px;
+            text-wrap: balance;
         }
 
         .hero-kicker {
@@ -296,6 +279,8 @@
             font-size: 1.45rem;
             line-height: 1.32;
             font-weight: 500;
+            letter-spacing: -0.012em;
+            text-wrap: pretty;
         }
 
         .hero-kicker strong { color: var(--text); }
@@ -408,8 +393,7 @@
             position: relative;
             width: min(100%, 575px);
             justify-self: end;
-            transform: translate3d(0, var(--portrait-y), 0) scale(var(--portrait-scale));
-            will-change: transform;
+            transform: translate3d(0, 0, 0) scale(1);
         }
 
         .portrait-shell {
@@ -418,7 +402,7 @@
             overflow: hidden;
             border-radius: var(--radius);
             background: var(--surface-strong);
-            box-shadow: var(--shadow);
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.14);
         }
 
         .portrait-shell::before {
@@ -439,7 +423,7 @@
             z-index: 3;
             pointer-events: none;
             border: 1px solid rgba(255, 255, 255, 0.38);
-            border-radius: 7px;
+            border-radius: calc(var(--radius) - 1px);
         }
 
         .hero-portrait {
@@ -447,10 +431,9 @@
             height: 100%;
             display: block;
             object-fit: cover;
-            transform: translate3d(0, var(--portrait-img-y), 0) scale(var(--portrait-zoom));
+            transform: translate3d(0, 0, 0) scale(1.025);
             transform-origin: center;
             filter: saturate(1.03) contrast(1.04);
-            will-change: transform;
         }
 
         .portrait-caption {
@@ -495,25 +478,26 @@
 
         /* ---------- SECTION HEADINGS ---------- */
         .section-head {
-            max-width: 820px;
-            margin: 100px 0 38px;
+            max-width: 920px;
+            margin: 120px 0 46px;
         }
 
         .section-head .eyebrow {
             color: var(--accent);
             font-size: 13px;
             font-weight: 800;
-            letter-spacing: 0;
+            letter-spacing: 0.045em;
             text-transform: uppercase;
             margin-bottom: 11px;
         }
 
         .section-head h2 {
             color: var(--text);
-            font-size: 3rem;
+            font-size: clamp(3rem, 4.7vw, 3.8rem);
             font-weight: 800;
-            letter-spacing: 0;
-            line-height: 1.04;
+            letter-spacing: -0.025em;
+            line-height: 1.01;
+            text-wrap: balance;
         }
 
         /* ---------- ABOUT ---------- */
@@ -522,21 +506,27 @@
             padding: 8px 0 10px;
             background: transparent;
             color: var(--text-soft);
-            font-size: 1.08rem;
-            line-height: 1.72;
+            font-size: 1.105rem;
+            line-height: 1.78;
+            letter-spacing: normal;
+            text-wrap: pretty;
         }
 
         .about-card strong { color: var(--text); }
 
         .about-card > p {
-            max-width: 1040px;
+            max-width: 950px;
+        }
+
+        .about-card > p + p {
+            margin-top: 24px;
         }
 
         .about-card .research-list {
             counter-reset: research;
             list-style: none;
-            max-width: 1040px;
-            margin: 34px 0 32px;
+            max-width: 950px;
+            margin: 40px 0 38px;
             display: flex;
             flex-direction: column;
             gap: 4px;
@@ -552,7 +542,7 @@
             background: transparent;
             color: var(--text-soft);
             font-size: 15px;
-            line-height: 1.62;
+            line-height: 1.68;
         }
 
         .about-card .research-list li::before {
@@ -570,7 +560,8 @@
             color: var(--text);
             margin-bottom: 3px;
             font-size: 17px;
-            line-height: 1.35;
+            line-height: 1.32;
+            letter-spacing: -0.01em;
         }
 
         .about-card .research-copy {
@@ -582,41 +573,45 @@
             position: relative;
             display: grid;
             grid-template-columns: minmax(310px, 0.9fr) minmax(0, 1.1fr);
-            gap: 34px;
+            gap: 40px;
             align-items: center;
             background: var(--surface);
             border: 1px solid var(--line);
             border-radius: var(--radius);
-            padding: 20px;
-            margin-bottom: 18px;
-            overflow: hidden;
-            transition: transform 0.35s var(--ease), border-color 0.35s ease, box-shadow 0.35s ease;
+            padding: 22px;
+            margin-bottom: 24px;
+            overflow: visible;
+            isolation: isolate;
+            transition: transform 0.52s var(--ease), border-color 0.52s var(--ease);
         }
 
-        .pub::before {
+        .pub::after {
             content: "";
             position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--accent), var(--violet));
-            opacity: 0;
-            transition: opacity 0.35s ease;
-        }
-
-        .pub:hover {
-            transform: translateY(-3px);
-            border-color: var(--line-strong);
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            border-radius: inherit;
             box-shadow: var(--shadow-hover);
+            opacity: 0;
+            transition: opacity 0.52s var(--ease);
         }
 
-        .pub:hover::before { opacity: 1; }
+        @media (hover: hover) {
+            .pub:hover {
+                transform: translateY(-2px);
+                border-color: var(--line-strong);
+            }
+
+            .pub:hover::after {
+                opacity: 1;
+            }
+        }
 
         .pub-img {
             position: relative;
             overflow: hidden;
-            border-radius: var(--radius);
+            border-radius: var(--radius-inner);
             background:
                 linear-gradient(180deg, var(--surface-soft), var(--surface-strong));
             display: block;
@@ -635,29 +630,38 @@
             right: 10px;
             bottom: 10px;
             z-index: 2;
-            padding: 6px 9px;
+            padding: 7px 11px;
             border-radius: 980px;
             border: 1px solid rgba(255, 255, 255, 0.48);
-            background: rgba(255, 255, 255, 0.72);
+            background: rgba(255, 255, 255, 0.94);
             color: #1d1d1f;
             font-size: 12px;
-            font-weight: 650;
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            font-weight: 700;
+            letter-spacing: -0.005em;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+            transition: background 0.25s ease, transform 0.35s var(--ease), box-shadow 0.35s ease;
+        }
+
+        .pub-img .full:hover {
+            background: rgba(255, 255, 255, 0.96);
+            color: #1d1d1f;
+            transform: translateY(-1px);
+            box-shadow: 0 7px 22px rgba(0, 0, 0, 0.12);
         }
 
         .pub-body {
             min-width: 0;
-            padding: 8px 8px 8px 0;
+            padding: 10px 14px 10px 0;
         }
 
         .pub-body h3 {
             color: var(--text);
-            font-size: 1.48rem;
+            font-size: 1.62rem;
             font-weight: 750;
-            letter-spacing: 0;
-            line-height: 1.2;
-            margin-bottom: 12px;
+            letter-spacing: -0.018em;
+            line-height: 1.16;
+            margin-bottom: 14px;
+            text-wrap: balance;
         }
 
         .pub-venue {
@@ -671,15 +675,16 @@
             font-size: 12px;
             font-weight: 750;
             line-height: 1.35;
+            letter-spacing: 0.005em;
         }
 
         .pub-venue .red { color: var(--danger); }
 
         .pub-authors {
             color: var(--text-soft);
-            font-size: 14px;
-            line-height: 1.52;
-            margin-bottom: 12px;
+            font-size: 14.5px;
+            line-height: 1.6;
+            margin-bottom: 13px;
         }
 
         .me {
@@ -691,9 +696,12 @@
         }
 
         .pub-desc {
+            max-width: 68ch;
             color: var(--text-soft);
-            font-size: 15px;
-            line-height: 1.64;
+            font-size: 15.5px;
+            line-height: 1.7;
+            letter-spacing: normal;
+            text-wrap: pretty;
         }
 
         .pub-links {
@@ -723,11 +731,11 @@
         sup.cofirst { font-size: 0.7em; }
 
         .subhead {
-            margin: 54px 0 24px;
+            margin: 66px 0 28px;
             color: var(--text);
-            font-size: 1.5rem;
+            font-size: 1.65rem;
             font-weight: 750;
-            letter-spacing: 0;
+            letter-spacing: -0.015em;
         }
 
         /* ---------- AWARDS ---------- */
@@ -745,7 +753,7 @@
             padding: 18px 18px;
             background: var(--surface);
             border: 1px solid var(--line);
-            border-radius: var(--radius);
+            border-radius: var(--radius-inner);
             color: var(--text-soft);
             font-size: 15px;
             line-height: 1.45;
@@ -785,7 +793,7 @@
             padding: 18px 18px;
             background: var(--surface);
             border: 1px solid var(--line);
-            border-radius: var(--radius);
+            border-radius: var(--radius-inner);
             color: var(--text-soft);
             font-size: 15px;
             line-height: 1.6;
@@ -819,6 +827,15 @@
             text-align: center;
         }
 
+        .footer a {
+            color: inherit;
+            font-weight: 650;
+        }
+
+        .footer a:hover {
+            color: var(--text);
+        }
+
         code {
             font-family: "SF Mono", ui-monospace, Menlo, monospace;
             padding: 2px 7px;
@@ -831,20 +848,25 @@
         /* ---------- MOTION ---------- */
         .motion-ready .reveal {
             opacity: 0;
-            filter: blur(10px);
-            transform: translate3d(0, 42px, 0) scale(0.985);
-            transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), filter 0.8s var(--ease);
+            transform: translate3d(0, 24px, 0);
+            will-change: transform, opacity;
+            transition: opacity 0.68s var(--ease), transform 0.68s var(--ease);
+            transition-delay: var(--delay, 0ms);
+        }
+
+        .motion-ready .pub.reveal {
+            transition: opacity 0.68s var(--ease), transform 0.52s var(--ease), border-color 0.52s var(--ease);
             transition-delay: var(--delay, 0ms);
         }
 
         .motion-ready .reveal.is-visible {
             opacity: 1;
-            filter: blur(0);
-            transform: translate3d(0, 0, 0) scale(1);
+            transform: translate3d(0, 0, 0);
+            will-change: auto;
         }
 
         .motion-ready .pub.reveal.is-visible:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
         @media (max-width: 1060px) {
@@ -879,7 +901,7 @@
 
         @media (max-width: 860px) {
             .nav-links { display: none; }
-            .section-head h2 { font-size: 2.35rem; }
+            .section-head h2 { font-size: 2.65rem; }
             .pub {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -889,6 +911,12 @@
         }
 
         @media (max-width: 620px) {
+            .nav,
+            .nav.nav-scrolled {
+                background: var(--bg);
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+            }
             .wrap,
             .nav-inner {
                 padding-left: 18px;
@@ -920,12 +948,14 @@
             }
             .hero h1 {
                 font-size: 3.25rem;
+                letter-spacing: -0.028em;
                 line-height: 0.96;
                 margin-bottom: 16px;
             }
             .hero-kicker {
                 font-size: 1.04rem;
                 line-height: 1.4;
+                letter-spacing: -0.01em;
             }
             .penn-affiliation {
                 max-width: 320px;
@@ -935,13 +965,14 @@
                 line-height: 1.35;
             }
             .section-head {
-                margin-top: 70px;
-                margin-bottom: 28px;
+                margin-top: 80px;
+                margin-bottom: 32px;
             }
-            .section-head h2 { font-size: 2.05rem; }
+            .section-head h2 { font-size: 2.3rem; }
             .about-card {
                 padding: 0;
-                font-size: 1rem;
+                font-size: 1.02rem;
+                line-height: 1.74;
             }
             .about-card .research-list {
                 margin: 26px 0 26px;
@@ -959,7 +990,10 @@
             .about-card .research-list li strong {
                 font-size: 15px;
             }
-            .pub-body h3 { font-size: 1.25rem; }
+            .pub-body h3 {
+                font-size: 1.34rem;
+                line-height: 1.2;
+            }
             .awards-grid { grid-template-columns: 1fr; }
             .news-timeline {
                 padding-left: 14px;
@@ -1019,7 +1053,7 @@
                 <h1>Tianang Leng</h1>
                 <p class="hero-kicker">Building <strong>agentic AI systems</strong> that reason across language, molecules, images, and the physical world.</p>
                 <a class="penn-affiliation" href="https://www.upenn.edu" target="_blank" rel="noopener" aria-label="University of Pennsylvania">
-                    <img src="my_assets/images/penn_icon.png" alt="UPenn">
+                    <img src="my_assets/images/penn_icon.png" width="275" height="183" alt="UPenn" decoding="async">
                     <span>PhD Candidate @ University of Pennsylvania</span>
                 </a>
                 <div class="socials">
@@ -1036,7 +1070,7 @@
             </div>
             <figure class="portrait-stage" aria-label="Tianang Leng portrait">
                 <div class="portrait-shell">
-                    <img class="hero-portrait" src="my_assets/images/profile_2.jpg" alt="Tianang Leng portrait">
+                    <img class="hero-portrait" src="my_assets/images/profile_2.webp" width="1206" height="1608" alt="Tianang Leng portrait" decoding="async" fetchpriority="high">
                     <div class="portrait-caption">
                         <span>
                             <strong>AI for autonomous scientific discovery.</strong>
@@ -1079,8 +1113,8 @@
 
             <article class="pub">
                 <div class="pub-img">
-                    <img src="my_assets/images/LoRe.png" alt="When Reasoning Meets Its Laws">
-                    <a class="full" href="my_assets/images/LoRe.png" target="_blank">[ Full Image ]</a>
+                    <img src="my_assets/images/LoRe.webp" width="1400" height="828" alt="When Reasoning Meets Its Laws" loading="lazy" decoding="async">
+                    <a class="full" href="my_assets/images/LoRe.png" target="_blank">Full image ↗</a>
                 </div>
                 <div class="pub-body">
                     <h3>When Reasoning Meets Its Laws</h3>
@@ -1093,8 +1127,8 @@
 
             <article class="pub">
                 <div class="pub-img">
-                    <img src="my_assets/images/ApexOracle.png" alt="ApexOracle">
-                    <a class="full" href="my_assets/images/ApexOracle.png" target="_blank">[ Full Image ]</a>
+                    <img src="my_assets/images/ApexOracle.webp" width="1400" height="1275" alt="ApexOracle" loading="lazy" decoding="async">
+                    <a class="full" href="my_assets/images/ApexOracle.png" target="_blank">Full image ↗</a>
                 </div>
                 <div class="pub-body">
                     <h3>Predicting and generating antibiotics against future pathogens with ApexOracle</h3>
@@ -1107,8 +1141,8 @@
 
             <article class="pub">
                 <div class="pub-img">
-                    <img src="my_assets/images/NMI.webp" alt="AI in biomaterials discovery">
-                    <a class="full" href="my_assets/images/NMI.webp" target="_blank">[ Full Image ]</a>
+                    <img src="my_assets/images/NMI.webp" width="2131" height="878" alt="AI in biomaterials discovery" loading="lazy" decoding="async">
+                    <a class="full" href="my_assets/images/NMI.webp" target="_blank">Full image ↗</a>
                 </div>
                 <div class="pub-body">
                     <h3>AI in biomaterials discovery: generating self-assembling peptides with resource-efficient deep learning</h3>
@@ -1121,8 +1155,8 @@
 
             <article class="pub">
                 <div class="pub-img">
-                    <img src="my_assets/images/CellGenomics_1.png" alt="Class II bacteriocins atlas">
-                    <a class="full" href="my_assets/images/CellGenomics_1.png" target="_blank">[ Full Image ]</a>
+                    <img src="my_assets/images/CellGenomics_1.webp" width="1210" height="1210" alt="Class II bacteriocins atlas" loading="lazy" decoding="async">
+                    <a class="full" href="my_assets/images/CellGenomics_1.png" target="_blank">Full image ↗</a>
                 </div>
                 <div class="pub-body">
                     <h3>The gut's hidden arsenal: A genomics-guided atlas of class II bacteriocins</h3>
@@ -1137,8 +1171,8 @@
 
             <article class="pub">
                 <div class="pub-img">
-                    <img src="my_assets/images/SAM.png" alt="Self-sampling meta SAM">
-                    <a class="full" href="my_assets/images/SAM.png" target="_blank">[ Full Image ]</a>
+                    <img src="my_assets/images/SAM.webp" width="1400" height="519" alt="Self-sampling meta SAM" loading="lazy" decoding="async">
+                    <a class="full" href="my_assets/images/SAM.png" target="_blank">Full image ↗</a>
                 </div>
                 <div class="pub-body">
                     <h3>Self-sampling meta SAM: enhancing few-shot medical image segmentation with meta-learning</h3>
@@ -1158,7 +1192,7 @@
             </div>
             <article class="pub">
                 <div class="pub-img">
-                    <img src="my_assets/images/PepLink.png" alt="PepLink">
+                    <img src="my_assets/images/PepLink.webp" width="1254" height="1254" alt="PepLink" loading="lazy" decoding="async">
                 </div>
                 <div class="pub-body">
                     <h3>PepLink</h3>
@@ -1198,8 +1232,8 @@
 
             <article class="pub">
                 <div class="pub-img">
-                    <img src="my_assets/images/kaggle.png" alt="Kaggle competition">
-                    <a class="full" href="my_assets/images/kaggle.png" target="_blank">[ Full Image ]</a>
+                    <img src="my_assets/images/kaggle.webp" width="1400" height="614" alt="Kaggle competition" loading="lazy" decoding="async">
+                    <a class="full" href="my_assets/images/kaggle.png" target="_blank">Full image ↗</a>
                 </div>
                 <div class="pub-body">
                     <h3>Kaggle: Predict Student Performance from Game Play</h3>
@@ -1210,8 +1244,8 @@
 
             <article class="pub">
                 <div class="pub-img">
-                    <img src="my_assets/images/BCI.png" alt="BCI Robot Contest">
-                    <a class="full" href="my_assets/images/BCI.png" target="_blank">[ Full Image ]</a>
+                    <img src="my_assets/images/BCI.webp" width="1400" height="699" alt="BCI Robot Contest" loading="lazy" decoding="async">
+                    <a class="full" href="my_assets/images/BCI.png" target="_blank">Full image ↗</a>
                 </div>
                 <div class="pub-body">
                     <h3>2022 World Robot Contest — BCI Controlled Robot Contest</h3>
@@ -1222,8 +1256,8 @@
 
             <article class="pub">
                 <div class="pub-img">
-                    <img src="my_assets/images/arcface.png" alt="Masked Face Recognition">
-                    <a class="full" href="my_assets/images/arcface.png" target="_blank">[ Full Image ]</a>
+                    <img src="my_assets/images/arcface.webp" width="1400" height="750" alt="Masked Face Recognition" loading="lazy" decoding="async">
+                    <a class="full" href="my_assets/images/arcface.png" target="_blank">Full image ↗</a>
                 </div>
                 <div class="pub-body">
                     <h3>2022 HUST-Cambridge Foundations of Data Science — Masked Face Recognition</h3>
@@ -1234,10 +1268,10 @@
 
             <article class="pub">
                 <div class="pub-img">
-                    <video controls autoplay loop muted playsinline>
-                        <source src="my_assets/images/Track.mp4" type="video/mp4">
+                    <video controls loop muted playsinline preload="none" data-autoplay aria-label="Intelligent football game analysis demo">
+                        <source data-src="my_assets/images/Track.mp4" type="video/mp4">
                     </video>
-                    <a class="full" href="my_assets/images/Track.mp4" target="_blank">[ Full Video ]</a>
+                    <a class="full" href="my_assets/images/Track.mp4" target="_blank">Full video ↗</a>
                 </div>
                 <div class="pub-body">
                     <h3>Undergraduate Innovation & Entrepreneurship Project — Intelligent football game analysis</h3>
@@ -1265,7 +1299,7 @@
 
     <!-- ======= FOOTER ======= -->
     <footer class="footer">
-        <p>© <span id="year"></span> Tianang Leng · Philadelphia, PA</p>
+        <p>© <span id="year"></span> Tianang Leng · Philadelphia, PA · modified by <a href="https://jyzhang1208.github.io/" target="_blank" rel="noopener">Junyu</a>🐠</p>
     </footer>
 
     <script>
@@ -1291,24 +1325,33 @@
 
         // ----- Scroll choreography -----
         (function () {
-            var root = document.documentElement;
             var nav = document.querySelector('.nav');
             var hero = document.querySelector('.hero');
+            var heroCopy = document.querySelector('.hero-copy');
+            var portraitStage = document.querySelector('.portrait-stage');
+            var portraitImage = document.querySelector('.hero-portrait');
             var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             var ticking = false;
             var revealItems = [];
             var revealObserver = null;
 
-            root.classList.add('motion-ready');
+            document.documentElement.classList.add('motion-ready');
 
             function markRevealVisible(item) {
+                function clearRevealDelay(event) {
+                    if (event.propertyName !== 'opacity') return;
+                    item.style.setProperty('--delay', '0ms');
+                    item.removeEventListener('transitionend', clearRevealDelay);
+                }
+
+                item.addEventListener('transitionend', clearRevealDelay);
                 item.classList.add('is-visible');
                 if (revealObserver) {
                     revealObserver.unobserve(item);
                 }
             }
 
-            function updateRevealState() {
+            function updateRevealFallback() {
                 if (!revealItems.length) {
                     return;
                 }
@@ -1351,6 +1394,8 @@
                     revealItems.forEach(function (item) {
                         revealObserver.observe(item);
                     });
+                } else {
+                    updateRevealFallback();
                 }
             }
 
@@ -1361,25 +1406,35 @@
             function updateScrollState() {
                 ticking = false;
                 var scrollY = window.scrollY || window.pageYOffset || 0;
-                var doc = document.documentElement;
-                var maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);
-                var pageProgress = clamp(scrollY / maxScroll, 0, 1);
                 var heroHeight = hero ? hero.offsetHeight : window.innerHeight;
-                var heroProgress = clamp(scrollY / Math.max(1, heroHeight * 0.82), 0, 1);
+                var heroProgress = clamp(scrollY / Math.max(1, heroHeight * 0.9), 0, 1);
+                var useHeroMotion = !reduceMotion && window.innerWidth > 620;
+                var isHeroAnimating = useHeroMotion && heroProgress < 1;
 
-                root.style.setProperty('--nav-progress', pageProgress.toFixed(4));
                 if (nav) {
                     nav.classList.toggle('nav-scrolled', scrollY > 12);
                 }
 
-                if (!reduceMotion) {
-                    updateRevealState();
-                    root.style.setProperty('--hero-copy-y', (-72 * heroProgress).toFixed(1) + 'px');
-                    root.style.setProperty('--hero-copy-opacity', (1 - 0.58 * heroProgress).toFixed(3));
-                    root.style.setProperty('--portrait-y', (44 * heroProgress).toFixed(1) + 'px');
-                    root.style.setProperty('--portrait-scale', (1 - 0.055 * heroProgress).toFixed(3));
-                    root.style.setProperty('--portrait-zoom', (1.06 + 0.05 * heroProgress).toFixed(3));
-                    root.style.setProperty('--portrait-img-y', (-18 * heroProgress).toFixed(1) + 'px');
+                if (!revealObserver && !reduceMotion) {
+                    updateRevealFallback();
+                }
+
+                if (useHeroMotion && heroCopy && portraitStage && portraitImage) {
+                    heroCopy.style.transform = 'translate3d(0,' + (-42 * heroProgress).toFixed(1) + 'px,0)';
+                    heroCopy.style.opacity = (1 - 0.32 * heroProgress).toFixed(3);
+                    portraitStage.style.transform = 'translate3d(0,' + (28 * heroProgress).toFixed(1) + 'px,0) scale(' + (1 - 0.025 * heroProgress).toFixed(3) + ')';
+                    portraitImage.style.transform = 'translate3d(0,' + (-10 * heroProgress).toFixed(1) + 'px,0) scale(' + (1.025 + 0.025 * heroProgress).toFixed(3) + ')';
+                    heroCopy.style.willChange = isHeroAnimating ? 'transform, opacity' : 'auto';
+                    portraitStage.style.willChange = isHeroAnimating ? 'transform' : 'auto';
+                    portraitImage.style.willChange = isHeroAnimating ? 'transform' : 'auto';
+                } else if (heroCopy && portraitStage && portraitImage) {
+                    heroCopy.style.transform = '';
+                    heroCopy.style.opacity = '';
+                    portraitStage.style.transform = '';
+                    portraitImage.style.transform = '';
+                    heroCopy.style.willChange = 'auto';
+                    portraitStage.style.willChange = 'auto';
+                    portraitImage.style.willChange = 'auto';
                 }
             }
 
@@ -1394,6 +1449,42 @@
             window.addEventListener('scroll', requestTick, { passive: true });
             window.addEventListener('resize', requestTick);
             window.addEventListener('load', requestTick);
+        })();
+
+        // ----- Load and play the project video only near the viewport -----
+        (function () {
+            var video = document.querySelector('video[data-autoplay]');
+            if (!video) return;
+
+            var source = video.querySelector('source[data-src]');
+            var loaded = false;
+
+            function loadVideo() {
+                if (loaded || !source) return;
+                source.src = source.getAttribute('data-src');
+                video.load();
+                loaded = true;
+            }
+
+            if ('IntersectionObserver' in window) {
+                var videoObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            loadVideo();
+                            var playPromise = video.play();
+                            if (playPromise && typeof playPromise.catch === 'function') {
+                                playPromise.catch(function () {});
+                            }
+                        } else if (loaded) {
+                            video.pause();
+                        }
+                    });
+                }, { rootMargin: '480px 0px', threshold: 0.08 });
+
+                videoObserver.observe(video);
+            } else {
+                loadVideo();
+            }
         })();
 
         // ----- Footer year -----
