@@ -1051,7 +1051,7 @@
             <div class="hero-copy">
                 <div class="hero-eyebrow">Bioengineering PhD Candidate</div>
                 <h1>Tianang Leng</h1>
-                <p class="hero-kicker">Building <strong>agentic AI systems</strong> that reason across language, molecules, images, and the physical world.</p>
+                <p class="hero-kicker">Building AI systems that connect scientific literature and raw biological data with automated experimentation to uncover new biology and therapeutic targets.</p>
                 <a class="penn-affiliation" href="https://www.upenn.edu" target="_blank" rel="noopener" aria-label="University of Pennsylvania">
                     <img src="my_assets/images/penn_icon.png" width="275" height="183" alt="UPenn" decoding="async">
                     <span>PhD Candidate @ University of Pennsylvania</span>
@@ -1074,9 +1074,9 @@
                     <div class="portrait-caption">
                         <span>
                             <strong>AI for autonomous scientific discovery.</strong>
-                            From reasoning laws to molecular understanding.
+                            Connecting evidence. Automating experiments. Advancing discovery.
                         </span>
-                        <span class="caption-mark">UPenn<br>Bioengineering</span>
+                        <span class="caption-mark">UPenn<br>CIS & BE</span>
                     </div>
                 </div>
             </figure>
@@ -1089,14 +1089,15 @@
         <section id="about">
             <div class="section-head">
                 <div class="eyebrow">About</div>
-                <h2>Building AI that understands the real world</h2>
+                <h2>Toward autonomous biological discovery</h2>
             </div>
             <div class="about-card">
                 <p>I am a PhD student in Bioengineering at University of Pennsylvania, advised by Prof. <a href="https://delafuentelab.seas.upenn.edu/principal-investigator/" target="_blank">Cesar de la Fuente</a> and Prof. <a href="https://www.cis.upenn.edu/~myatskar/" target="_blank">Mark Yatskar</a>. Previously, I received my bachelor's degree in Artificial Intelligence from <a href="https://www.usnews.com/education/best-global-universities/huazhong-university-of-science-technology-505190" target="_blank">Huazhong University of Science and Technology</a>. I am fortunate to work under the supervision of Prof. <a href="https://aicb.lab.westlake.edu.cn/People.htm" target="_blank">Jianyang Zeng</a> at Westlake University, Prof. <a href="https://ics.uci.edu/~xhx/" target="_blank">Xiaohui Xie</a> in University of California, Irvine and Prof. <a href="https://lab.bciml.cn/en/home/" target="_blank">Dongrui Wu</a> in Huazhong University of Science and Technology.</p>
-                <p style="margin-top:18px;">In the era of large language models, my research objective is to build models that can interact with and truly understand the real world—both the macroscopic world of physical objects and the microscopic 3D molecular world—so as to develop a knowledgeable, reliable AI biochemical expert capable of autonomous scientific discovery. To this end, my previous work has centered on:</p>
+                <p style="margin-top:18px;">My long-term goal is to build autonomous AI systems that discover biological mechanisms through a continuous cycle of hypothesis generation, experimentation, and learning. I am particularly interested in connecting evidence across scientific literature and biological data to uncover overlooked relationships and generate testable mechanistic hypotheses.</p>
+                <p>A central question in my research is how AI can learn reliably when experimental feedback is costly, delayed, and noisy. I aim to connect scientific reasoning with informative experimental design and low-cost laboratory automation, enabling systems to distinguish competing explanations, revise their hypotheses, and uncover mechanisms that could support new therapeutic strategies. To this end, my previous work has centered on:</p>
                 <ul class="research-list">
                     <li><span class="research-copy"><strong>Language model reasoning:</strong> how task or problem difficulty systematically affects the required reasoning depth/trajectory of LLMs and how this in turn influences accuracy.</span></li>
-                    <li><span class="research-copy"><strong>Agentic system for scientific discovery:</strong> Build an agentic system that serves as a unified framework for molecular property prediction. The system performs structure-grounded reasoning and calls lightweight, verifiable tools when needed—rather than directly calling opaque deep-learning black-box predictors.</span></li>
+                    <li><span class="research-copy"><strong>Agentic systems for scientific discovery:</strong> enabling LLMs to reason across experimental evidence from scientific literature. In molecular property prediction, my work combines a learned model of evidence transfer with context optimization to select informative, relevant, and diverse measurements from related molecules, allowing LLMs to predict by analogy across molecules and assay contexts.</span></li>
                     <li><span class="research-copy"><strong>Molecular understanding and generation:</strong> the advantages of discrete diffusion–style language models for molecular representation and design, featuring applications to antimicrobial peptides design.</span></li>
                     <li><span class="research-copy"><strong>Medical image analysis:</strong> few-shot, high-precision segmentation of pathological organs. Going forward, this focus should be switched to vision-language models for cell-level perturbation–response understanding, coupled with automated, grounded natural-language reasoning outputs to close the loop from observation to scientific hypothesis.</span></li>
                 </ul>
@@ -1113,15 +1114,44 @@
 
             <article class="pub">
                 <div class="pub-img">
+                    <img src="my_assets/images/Ampere_overview.webp" width="1800" height="889" alt="Ampere: literature evidence, context optimization, and analogical molecular property prediction" loading="lazy" decoding="async">
+                    <a class="full" href="my_assets/images/Ampere_overview.pdf" target="_blank" rel="noopener">Full image ↗</a>
+                </div>
+                <div class="pub-body">
+                    <h3>Making Every Experiment Count: Analogical Molecular Property Prediction</h3>
+                    <span class="pub-venue">Preprint</span>
+                    <p class="pub-authors"><span class="me">Tianang Leng<sup class="cofirst">†</sup></span>, Joseph Lee<sup class="cofirst">†</sup>, Haydn Jones, Cesar de la Fuente, Jacob Gardner, Mark Yatskar</p>
+                    <p class="pub-desc">We introduce a framework that predicts molecular properties by <strong>drawing on various experimental evidence from related molecules</strong>. A learned property-transfer model estimates whether a measurement on one molecule applies to another, while context optimization selects relevant, informative, and diverse evidence for an LLM to reason over. Across six molecular property prediction tasks, our framework outperforms the strongest ML baselines by <strong>11.9 percentage points on literature-derived benchmarks and 11.2 points on TDC</strong> in mean macro-F1.</p>
+                    <div class="pub-links"><a href="my_assets/Ampere.pdf" target="_blank" rel="noopener">Paper</a></div>
+                </div>
+            </article>
+
+            <article class="pub">
+                <div class="pub-img">
                     <img src="my_assets/images/LoRe.webp" width="1400" height="828" alt="When Reasoning Meets Its Laws" loading="lazy" decoding="async">
                     <a class="full" href="my_assets/images/LoRe.png" target="_blank">Full image ↗</a>
                 </div>
                 <div class="pub-body">
                     <h3>When Reasoning Meets Its Laws</h3>
-                    <span class="pub-venue">NeurIPS 2025 Workshop on Efficient Reasoning · <span class="red">Oral</span> · <span class="red">Best Paper Nomination</span></span>
+                    <span class="pub-venue">NeurIPS 2026</span>
+                    <!-- <span class="pub-venue">NeurIPS 2025 Workshop on Efficient Reasoning · <span class="red">Oral</span> · <span class="red">Best Paper Nomination</span></span> -->
                     <p class="pub-authors">Junyu Zhang<sup class="cofirst">†</sup>, Yifan Sun<sup class="cofirst">†</sup>, <span class="me">Tianang Leng<sup class="cofirst">†</sup></span>, Jingyan Shen<sup class="cofirst">†</sup>, Liu Ziyin, Paul Pu Liang, Huan Zhang</p>
                     <p class="pub-desc">The paper introduces LORE, a framework that defines how large reasoning models should scale their thinking and accuracy with problem complexity. It builds a benchmark (LORE-BENCH) to test two key properties—monotonicity and compositionality—and finds current models are mostly monotonic but not compositional; fine-tuning to enforce the compute rule improves overall reasoning performance.</p>
                     <div class="pub-links"><a href="my_assets/LoRe.pdf">Paper</a></div>
+                </div>
+            </article>
+
+            <article class="pub">
+                <div class="pub-img">
+                    <img src="my_assets/images/Nature_reviews_bioengineering.webp" width="1800" height="1141" alt="Machine learning workflows for biomaterials discovery" loading="lazy" decoding="async">
+                    <a class="full" href="my_assets/images/Nature_reviews_bioengineering.pdf" target="_blank" rel="noopener">Full image ↗</a>
+                </div>
+                <div class="pub-body">
+                    <h3>Machine learning for biomaterials design</h3>
+                    <span class="pub-venue">Nature Reviews Bioengineering</span>
+                    <p class="pub-authors">Xiaoqiong Xia<sup class="cofirst">†</sup>, <span class="me">Tianang Leng<sup class="cofirst">†</sup></span>, Andrés J. García, Cesar de la Fuente-Nunez</p>
+                    <p class="pub-desc">This review surveys how <strong>machine learning and deep learning accelerate biomaterials design</strong> across metals, polymers, ceramics, and biological materials. It connects property prediction, generative design, and active learning with public datasets and experimental workflows, and examines challenges in data quality, interpretability, and multi-scale modelling. We discuss how self-driving laboratories, multimodal data, and physics-informed models could support more autonomous and personalized biomaterials discovery.</p>
+                    <div class="pub-links"><a href="https://www.nature.com/articles/s44222-026-00476-w" target="_blank" rel="noopener">Paper</a></div>
                 </div>
             </article>
 
