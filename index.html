@@ -203,6 +203,131 @@
             padding: 28px 0;
         }
 
+        /* ---------- OPENAI FILM ---------- */
+        .feature-entry {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 23px;
+            font-size: 13px;
+            font-weight: 550;
+            color: var(--text-soft);
+        }
+
+        .feature-entry:hover { color: var(--accent); }
+        .feature-entry i { font-size: 10px; }
+
+        .openai-feature { padding: 76px 0 54px; text-align: center; }
+        .film-eyebrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 19px;
+            color: var(--text-soft);
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .film-brand-mark { width: 23px; height: 23px; flex: 0 0 auto; }
+        html[data-theme="dark"] .film-brand-mark { filter: invert(1); }
+
+        .openai-feature h2 {
+            margin: 0 auto;
+            max-width: 850px;
+            font-size: clamp(2.25rem, 4.5vw, 3.8rem);
+            line-height: 1.06;
+            letter-spacing: -0.04em;
+            font-weight: 700;
+            text-wrap: balance;
+        }
+
+        .film-description {
+            max-width: 660px;
+            margin: 23px auto 0;
+            color: var(--text-soft);
+            font-size: 18px;
+            line-height: 1.55;
+            text-wrap: pretty;
+        }
+
+        .film-stage {
+            position: relative;
+            margin: 36px 0 0;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 24px;
+            background: #151719;
+            isolation: isolate;
+        }
+
+        .film-preview { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .film-toggle, .film-close {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 50%;
+            background: rgba(20,20,22,0.72);
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .film-toggle { position: absolute; right: 18px; bottom: 18px; font-size: 13px; }
+        .film-toggle:hover, .film-close:hover { background: rgba(20,20,22,0.95); }
+        .film-toggle[hidden] { display: none; }
+        .film-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px 30px;
+            margin-top: 25px;
+            font-size: 17px;
+        }
+
+        .film-actions a { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; }
+        .film-actions i { font-size: 12px; }
+        .film-duration { color: var(--text-faint); font-size: 14px; }
+        .film-credit { margin-top: 10px; color: var(--text-faint); font-size: 12px; }
+        .film-dialog {
+            position: fixed;
+            inset: 0;
+            width: min(1100px, calc(100vw - 36px));
+            max-width: none;
+            max-height: calc(100dvh - 36px);
+            margin: auto;
+            padding: 18px;
+            border: 1px solid #333;
+            border-radius: 22px;
+            background: #111113;
+            color: #f5f5f7;
+        }
+
+        .film-dialog::backdrop { background: rgba(0,0,0,0.82); }
+        .film-dialog-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+        .film-dialog h2 { font-size: 17px; font-weight: 550; letter-spacing: -0.01em; }
+        .film-close { flex: 0 0 auto; }
+        .film-full { display: block; width: 100%; max-height: calc(100dvh - 180px); border-radius: 8px; background: #000; }
+        .film-status { font-size: 13px; color: #b8b8bf; }
+        .film-status:not(:empty) { margin-top: 12px; }
+        body.film-open { overflow: hidden; }
+
+        @media (max-width: 620px) {
+            .openai-feature { padding-top: 40px; padding-bottom: 10px; }
+            .film-eyebrow { font-size: 13px; margin-bottom: 15px; }
+            .film-description { font-size: 16px; margin-top: 20px; }
+            .film-stage { margin-top: 27px; border-radius: 16px; }
+            .film-toggle { right: 10px; bottom: 10px; }
+            .film-actions { font-size: 15px; gap: 4px 20px; margin-top: 17px; }
+            .film-duration { font-size: 12px; }
+            .film-dialog { padding: 12px; border-radius: 16px; }
+            .film-dialog h2 { font-size: 14px; }
+        }
+
         /* ---------- HERO ---------- */
         .hero {
             position: relative;
@@ -1067,6 +1192,7 @@
                     <a class="btn btn-secondary" href="my_assets/cv.pdf" target="_blank"><i class="fas fa-file-alt"></i> Curriculum Vitae</a>
                 </div>
                 <span class="cv-note">CV last updated: Sep 2026</span>
+                <a class="feature-entry" href="#openai">Featured in OpenAI’s antibiotic discovery story <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
             </div>
             <figure class="portrait-stage" aria-label="Tianang Leng portrait">
                 <div class="portrait-shell">
@@ -1084,6 +1210,28 @@
     </header>
 
     <div class="wrap">
+
+        <!-- ======= OPENAI FEATURE ======= -->
+        <section class="openai-feature" id="openai" aria-labelledby="openai-title">
+            <p class="film-eyebrow">
+                <!-- OpenAI mark via https://github.com/lobehub/lobe-icons/blob/master/packages/static-svg/icons/openai.svg -->
+                <img class="film-brand-mark" src="my_assets/images/openai-mark.svg" width="23" height="23" alt="" aria-hidden="true">
+                <span>Featured by OpenAI</span>
+            </p>
+            <h2 id="openai-title">Accelerating antibiotic<br>discovery with AI.</h2>
+            <p class="film-description">Sharing our approach to AI-driven antibiotic discovery in a film by OpenAI.</p>
+            <div class="film-stage">
+                <video class="film-preview" id="openai-preview" width="1280" height="720" muted loop playsinline preload="none" poster="my_assets/images/openai-antibiotic-poster.webp" aria-label="Silent preview of OpenAI’s film, showing Tianang Leng and his research screen">
+                    <source data-src="my_assets/images/openai-antibiotic-preview.mp4" type="video/mp4">
+                </video>
+                <button class="film-toggle" id="film-toggle" type="button" aria-label="Play video preview" hidden><i class="fas fa-play" aria-hidden="true"></i></button>
+            </div>
+            <div class="film-actions">
+                <a id="watch-film" href="my_assets/images/openai-antibiotic-film.mp4">Watch the film <i class="far fa-circle-play" aria-hidden="true"></i><span class="film-duration">2:09</span></a>
+                <a href="https://openai.com/index/accelerating-antibiotic-discovery/" target="_blank" rel="noopener">Read the OpenAI story <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+            </div>
+            <p class="film-credit">A film by OpenAI · Featuring the de la Fuente Lab at Penn</p>
+        </section>
 
         <!-- ======= ABOUT ======= -->
         <section id="about">
@@ -1328,6 +1476,15 @@
 
     </div><!-- /wrap -->
 
+    <dialog class="film-dialog" id="film-dialog" aria-labelledby="film-dialog-title">
+        <div class="film-dialog-head">
+            <h2 id="film-dialog-title">Accelerating antibiotic discovery with ChatGPT</h2>
+            <button class="film-close" id="film-close" type="button" aria-label="Close film" autofocus><i class="fas fa-xmark" aria-hidden="true"></i></button>
+        </div>
+        <video class="film-full" id="openai-film" controls playsinline preload="none" poster="my_assets/images/openai-antibiotic-poster.webp" aria-label="OpenAI’s full film on antibiotic discovery"></video>
+        <p class="film-status" id="film-status" role="status"></p>
+    </dialog>
+
     <!-- ======= FOOTER ======= -->
     <footer class="footer">
         <p>© <span id="year"></span> Tianang Leng · Philadelphia, PA · modified by <a href="https://jyzhang1208.github.io/" target="_blank" rel="noopener">Junyu</a>🐠</p>
@@ -1516,6 +1673,115 @@
             } else {
                 loadVideo();
             }
+        })();
+
+        // ----- OpenAI: a viewport-controlled preview and an on-demand full film -----
+        (function () {
+            var preview = document.getElementById('openai-preview');
+            var source = preview.querySelector('source');
+            var toggle = document.getElementById('film-toggle');
+            var watch = document.getElementById('watch-film');
+            var dialog = document.getElementById('film-dialog');
+            var film = document.getElementById('openai-film');
+            var status = document.getElementById('film-status');
+            var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            var connection = navigator.connection;
+            var visible = false;
+            var userPaused = false;
+            var userRequestedPlay = false;
+
+            toggle.hidden = false;
+
+            function updateControl() {
+                toggle.setAttribute('aria-label', preview.paused ? 'Play video preview' : 'Pause video preview');
+                toggle.querySelector('i').className = preview.paused ? 'fas fa-play' : 'fas fa-pause';
+            }
+
+            function shouldPlay() {
+                var allowAutoplay = !reducedMotion.matches && !(connection && connection.saveData);
+                return visible && !document.hidden && !dialog.open && !userPaused && (allowAutoplay || userRequestedPlay);
+            }
+
+            function syncPreview() {
+                if (!shouldPlay()) {
+                    preview.pause();
+                    return;
+                }
+                if (!source.hasAttribute('src')) {
+                    source.src = source.getAttribute('data-src');
+                    preview.load();
+                }
+                var promise = preview.play();
+                if (promise) promise.then(function () {
+                    if (!shouldPlay()) preview.pause();
+                }).catch(updateControl);
+            }
+
+            preview.addEventListener('play', updateControl);
+            preview.addEventListener('pause', updateControl);
+            toggle.addEventListener('click', function () {
+                userPaused = !preview.paused;
+                userRequestedPlay = !userPaused;
+                syncPreview();
+            });
+
+            if ('IntersectionObserver' in window) {
+                new IntersectionObserver(function (entries) {
+                    visible = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.25;
+                    syncPreview();
+                }, { threshold: [0, 0.25] }).observe(preview);
+            } else {
+                visible = true;
+                userPaused = true;
+            }
+
+            document.addEventListener('visibilitychange', syncPreview);
+            reducedMotion.addEventListener('change', function () {
+                userRequestedPlay = false;
+                syncPreview();
+            });
+            if (connection) connection.addEventListener('change', syncPreview);
+
+            // The link remains a direct playable file if dialog support is unavailable.
+            if (typeof dialog.showModal === 'function') {
+                watch.addEventListener('click', function (event) {
+                    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                    event.preventDefault();
+                    dialog.showModal();
+                    document.body.classList.add('film-open');
+                    document.querySelectorAll('video').forEach(function (video) { video.pause(); });
+                    status.textContent = '';
+                    if (!film.hasAttribute('src')) film.src = watch.href;
+                    film.currentTime = 0;
+                    var promise = film.play();
+                    if (promise) promise.then(function () {
+                        if (!dialog.open) film.pause();
+                    }).catch(function () {
+                        if (dialog.open && !film.error) status.textContent = 'Press play to start the film.';
+                    });
+                });
+            }
+
+            film.addEventListener('playing', function () { status.textContent = ''; });
+            film.addEventListener('error', function () {
+                status.replaceChildren(document.createTextNode('The film could not load. '));
+                var link = document.createElement('a');
+                link.href = 'https://openai.com/index/accelerating-antibiotic-discovery/';
+                link.textContent = 'Watch on OpenAI';
+                link.target = '_blank';
+                link.rel = 'noopener';
+                status.appendChild(link);
+            });
+            document.getElementById('film-close').addEventListener('click', function () { dialog.close(); });
+            dialog.addEventListener('click', function (event) {
+                var rect = dialog.getBoundingClientRect();
+                if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) dialog.close();
+            });
+            dialog.addEventListener('close', function () {
+                film.pause();
+                document.body.classList.remove('film-open');
+                syncPreview();
+            });
         })();
 
         // ----- Footer year -----

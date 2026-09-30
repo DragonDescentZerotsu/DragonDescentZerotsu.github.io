@@ -1,0 +1,6 @@
+# Preserve the original locally; publish the optimized web versions.
+/my_assets/images/OpenAI-Accelerating-Antibiotic-Discovery-4K.mp4
+
+# Local browser review artifacts.
+/output/playwright/
+/.playwright-cli/
