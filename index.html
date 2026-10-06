@@ -1156,6 +1156,7 @@
             <span class="nav-brand">Tianang Leng</span>
             <div class="nav-links">
                 <a href="#about">About</a>
+                <a href="#ongoing-research">Research</a>
                 <a href="#publications">Publications</a>
                 <a href="#tools">Tools</a>
                 <a href="#awards">Awards</a>
@@ -1251,6 +1252,28 @@
                 </ul>
                 <p>If you would like to discuss my research or potential collaborations further, feel free to contact me. I'm open to connect and collaborate with each other.</p>
             </div>
+        </section>
+
+        <!-- ======= ONGOING RESEARCH ======= -->
+        <section id="ongoing-research" aria-labelledby="ongoing-research-title">
+            <div class="section-head">
+                <div class="eyebrow">Research in progress</div>
+                <h2 id="ongoing-research-title">Ongoing Research</h2>
+            </div>
+
+            <article class="pub">
+                <div class="pub-img">
+                    <video controls loop muted playsinline preload="none" data-autoplay width="1280" height="720" poster="my_assets/images/biodexbench-poster.webp" aria-label="BioDexBench: scripted dual-arm pipette handoff and tip attachment in simulation">
+                        <source data-src="my_assets/images/biodexbench-demo.mp4" type="video/mp4">
+                        <a href="my_assets/images/biodexbench-demo.mp4">Watch the BioDexBench demo</a>
+                    </video>
+                </div>
+                <div class="pub-body">
+                    <h3>BioDexBench: Dexterous Robotic Manipulation for Wet-Lab Automation</h3>
+                    <span class="pub-venue">Ongoing research</span>
+                    <p class="pub-desc">We are developing a simulation benchmark for dexterous wet-lab manipulation, from individual tool-use skills to longer-horizon experimental workflows such as sample aliquoting and serial dilution. It aims to evaluate planning, generalization, and error recovery while preserving sample identity, liquid-transfer accuracy, and contamination control.</p>
+                </div>
+            </article>
         </section>
 
         <!-- ======= PUBLICATIONS ======= -->
@@ -1639,40 +1662,46 @@
             window.addEventListener('load', requestTick);
         })();
 
-        // ----- Load and play the project video only near the viewport -----
+        // ----- Lazily load each project video and play only while visible -----
         (function () {
-            var video = document.querySelector('video[data-autoplay]');
-            if (!video) return;
+            var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            document.querySelectorAll('video[data-autoplay]').forEach(function (video) {
+                var source = video.querySelector('source[data-src]');
+                var loaded = false;
+                var visible = false;
 
-            var source = video.querySelector('source[data-src]');
-            var loaded = false;
+                function loadVideo() {
+                    if (loaded || !source) return;
+                    source.src = source.getAttribute('data-src');
+                    video.load();
+                    loaded = true;
+                }
 
-            function loadVideo() {
-                if (loaded || !source) return;
-                source.src = source.getAttribute('data-src');
-                video.load();
-                loaded = true;
-            }
-
-            if ('IntersectionObserver' in window) {
-                var videoObserver = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (entry) {
-                        if (entry.isIntersecting) {
-                            loadVideo();
-                            var playPromise = video.play();
-                            if (playPromise && typeof playPromise.catch === 'function') {
-                                playPromise.catch(function () {});
-                            }
-                        } else if (loaded) {
-                            video.pause();
+                function updatePlayback() {
+                    if (!visible || document.hidden) {
+                        video.pause();
+                    } else if (!reducedMotion.matches) {
+                        var playPromise = video.play();
+                        if (playPromise && typeof playPromise.catch === 'function') {
+                            playPromise.catch(function () {});
                         }
-                    });
-                }, { rootMargin: '480px 0px', threshold: 0.08 });
+                    }
+                }
 
-                videoObserver.observe(video);
-            } else {
-                loadVideo();
-            }
+                if ('IntersectionObserver' in window) {
+                    var videoObserver = new IntersectionObserver(function (entries) {
+                        entries.forEach(function (entry) {
+                            visible = entry.isIntersecting;
+                            if (visible) loadVideo();
+                            updatePlayback();
+                        });
+                    }, { threshold: 0.08 });
+                    videoObserver.observe(video);
+                } else {
+                    loadVideo();
+                }
+                document.addEventListener('visibilitychange', updatePlayback);
+            });
         })();
 
         // ----- OpenAI: a viewport-controlled preview and an on-demand full film -----
