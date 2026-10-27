@@ -38,3 +38,5 @@ git remote get-url --push --all origin
 - GitHub Actions 的 `Publish homepage` 工作流必须成功；历史失败记录不会因新部署成功而消失。
 - 失败通知来自 GitHub Actions，Google Search Console 的开通邮件是使用指南。无需为了修复部署而关闭通知。
 - 旧入口跳转、历史资源路径、PepLink 独立项目站点继续保留。
+
+修复后的手动重发入口是 Actions → `Publish homepage` → Run workflow（main）。旧的 `pages build and deployment` 历史任务属于此前的分支发布方式，不要再重跑；查看失败时应对照当前提交和新工作流。手动重发也需要分别确认两个站点，或使用上述本地发布脚本统一检查。
