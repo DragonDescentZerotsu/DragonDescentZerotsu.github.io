@@ -29,7 +29,3 @@ git remote get-url --push --all origin
 ```
 
 保留两个仓库及其 Pages 设置（main，根目录）。PepLink 是独立的网站仓库，在本机 Published_packages/PepLink_Page 目录维护；它也配置了新旧双推送。
-
-## 搜索站点地图
-
-`sitemap.xml` 与 `sitemap.txt` 列出同一组规范网址；新增页面时同时更新。纯文本版本用于提供独立的抓取入口，Google 官方支持这种格式。Search Console 的实时检测已成功抓取 XML，但提交报告此前仍显示无法抓取，不能据此断言 XML 格式有错。
