@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        // Publish the same files to both hosts; only the legacy homepage redirects.
+        if (window.location.hostname.toLowerCase() === 'dragondescentzerotsu.github.io') {
+            window.location.replace('https://tianangleng.github.io/' + window.location.search + window.location.hash);
+        }
+    </script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-64M80RKFBS"></script>
     <script>
@@ -1403,7 +1409,7 @@
                     <div class="pub-links">
                         <a href="https://github.com/DragonDescentZerotsu/PepLink" target="_blank">GitHub</a>
                         <a href="https://huggingface.co/spaces/Kiria-Nozan/PepLink" target="_blank">Web Tool</a>
-                        <a href="https://dragondescentzerotsu.github.io/peptide_to_smiles/" target="_blank">Website</a>
+                        <a href="https://tianangleng.github.io/peptide_to_smiles/" target="_blank">Website</a>
                     </div>
                 </div>
             </article>
