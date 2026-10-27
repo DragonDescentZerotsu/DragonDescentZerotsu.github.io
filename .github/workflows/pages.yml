@@ -24,28 +24,31 @@ jobs:
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Configure Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+      - name: Record the published revision
+        env:
+          PUBLISHED_SHA: ${{ github.sha }}
+          PUBLISHED_REPOSITORY: ${{ github.repository }}
+        run: |
+          python3 - <<'PYCODE'
+          import json, os
+          from pathlib import Path
+          Path('deployment.json').write_text(json.dumps({
+              'commit': os.environ['PUBLISHED_SHA'],
+              'repository': os.environ['PUBLISHED_REPOSITORY'],
+          }) + '\n')
+          PYCODE
       - name: Build with the existing Jekyll pipeline
         uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
         with:
           source: ./
           destination: ./_site
-      - name: Check critical files and record the published revision
-        env:
-          PUBLISHED_SHA: ${{ github.sha }}
-          PUBLISHED_REPOSITORY: ${{ github.repository }}
+      - name: Check critical built files
         run: |
           cmp index.html _site/index.html
           cmp sitemap.xml _site/sitemap.xml
           cmp robots.txt _site/robots.txt
           cmp my_assets/cv.pdf _site/my_assets/cv.pdf
-          python3 - <<'PY'
-          import json, os
-          from pathlib import Path
-          Path('_site/deployment.json').write_text(json.dumps({
-              'commit': os.environ['PUBLISHED_SHA'],
-              'repository': os.environ['PUBLISHED_REPOSITORY'],
-          }) + '\n')
-          PY
+          cmp deployment.json _site/deployment.json
       - name: Upload the built site
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
