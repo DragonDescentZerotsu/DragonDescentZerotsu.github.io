@@ -4,3 +4,6 @@
 # Local browser review artifacts.
 /output/playwright/
 /.playwright-cli/
+
+# macOS folder metadata.
+.DS_Store

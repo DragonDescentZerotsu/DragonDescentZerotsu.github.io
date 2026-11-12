@@ -2,6 +2,7 @@
 """Push the homepage to both repositories and verify both live revisions."""
 
 import json
+import shutil
 import subprocess
 import sys
 import time
@@ -31,6 +32,15 @@ def main():
     if set(targets) != expected or len(targets) != 2:
         raise RuntimeError("origin 双推送配置不匹配，请按 PUBLISHING.md 恢复。")
 
+    if shutil.which("gh") is None:
+        raise RuntimeError("请先安装 GitHub CLI（gh）并登录，尚未推送。")
+    auth = subprocess.run(
+        ["gh", "auth", "status", "--hostname", "github.com"],
+        capture_output=True, text=True, timeout=30,
+    )
+    if auth.returncode != 0:
+        raise RuntimeError("GitHub 登录检查失败，请运行 gh auth status 检查，尚未推送。")
+
     commit = git("rev-parse", "HEAD")
     subprocess.run(["git", "push", "origin", "main"], cwd=ROOT, check=True)
     print("两边推送完成，正在等待实际上线：" + commit, flush=True)
@@ -56,10 +66,11 @@ def main():
                  "--commit", commit, "--limit", "1", "--json", "status,conclusion,url"],
                 text=True, capture_output=True, timeout=30,
             )
-            if runs.returncode == 0:
-                for run in json.loads(runs.stdout):
-                    if run["status"] == "completed" and run["conclusion"] != "success":
-                        raise RuntimeError("部署未成功：" + run["url"])
+            if runs.returncode != 0:
+                raise RuntimeError("无法查询部署状态：" + repo + "；请检查 gh 登录、仓库权限和网络。推送已完成，上线尚未确认。")
+            for run in json.loads(runs.stdout):
+                if run["status"] == "completed" and run["conclusion"] != "success":
+                    raise RuntimeError("部署未成功：" + run["url"] + "；按 PUBLISHING.md 重新运行工作流后再验证。")
         if pending:
             time.sleep(10)
     if pending:
