@@ -45,7 +45,17 @@ jobs:
       - name: Check critical built files
         run: |
           cmp index.html _site/index.html
-          cmp sitemap.xml _site/sitemap.xml
+          test -s _site/blog/index.html
+          python3 - <<'PYCODE'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+          base = "https://tianangleng.github.io"
+          urls = {loc.text for loc in ET.parse("_site/sitemap.xml").findall(".//{*}loc")}
+          assert {base + path for path in ("/", "/peptide_to_smiles/", "/blog/")} <= urls
+          for page in Path("_site/blog").rglob("index.html"):
+              path = page.parent.relative_to("_site").as_posix()
+              assert f"{base}/{path}/" in urls, path
+          PYCODE
           cmp robots.txt _site/robots.txt
           cmp my_assets/cv.pdf _site/my_assets/cv.pdf
           cmp deployment.json _site/deployment.json

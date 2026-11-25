@@ -159,6 +159,7 @@
             align-items: center;
         }
 
+        .nav-blog,
         .nav-links a {
             color: var(--text-soft);
             font-size: 13px;
@@ -458,6 +459,14 @@
             font-size: 17px;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
+        }
+
+        .xiaohongshu-mark {
+            width: 29px;
+            height: 29px;
+            background-color: currentColor;
+            -webkit-mask: url("my_assets/images/xiaohongshu.svg") center / contain no-repeat;
+            mask: url("my_assets/images/xiaohongshu.svg") center / contain no-repeat;
         }
 
         .socials a:hover {
@@ -1171,6 +1180,7 @@
                 <a href="#news">News</a>
             </div>
             <div class="nav-right">
+                <a class="nav-blog" href="/blog/">Blog</a>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
                 <a class="btn btn-primary nav-contact" href="mailto:ltianang@seas.upenn.edu"><i class="fas fa-paper-plane"></i> Contact</a>
             </div>
@@ -1194,6 +1204,7 @@
                     <a href="https://www.linkedin.com/in/tianang-leng-a63712282/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     <a href="https://github.com/DragonDescentZerotsu" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
                     <a href="https://scholar.google.com/citations?user=uL97fK8AAAAJ&amp;hl=en" target="_blank" rel="noopener" aria-label="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                    <a href="https://www.xiaohongshu.com/user/profile/5e0b68240000000001000ba6" target="_blank" rel="noopener" aria-label="Xiaohongshu (小红书)" title="小红书 · Xiaohongshu"><span class="xiaohongshu-mark" aria-hidden="true"></span></a>
                 </div>
                 <div class="cta-row">
                     <a class="btn btn-primary" href="mailto:ltianang@engineering.upenn.edu"><i class="fas fa-paper-plane"></i> Contact Me</a>

@@ -1,0 +1,44 @@
+---
+layout: blog
+---
+<article>
+  <header class="article-head{% if page.image %} illustrated{% endif %}">
+    <div>
+      {% if page.topic %}<p class="topic">{{ page.topic | escape }}</p>{% endif %}
+      <h1>{{ page.title | escape }}</h1>
+      {% if page.description %}<p class="deck">{{ page.description | escape }}</p>{% endif %}
+      <p class="meta"><a href="/">Tianang Leng</a><span aria-hidden="true">·</span><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%b %-d, %Y" }}</time></p>
+    </div>
+    {% if page.image %}
+      <figure class="plate">
+        <div class="specimen">
+          <img src="{{ page.image | escape }}" alt="{{ page.image_alt | escape }}" fetchpriority="high">
+          {% if page.image_label %}<span class="plate-label">{{ page.image_label | escape }}</span>{% endif %}
+        </div>
+        {% if page.image_caption %}<figcaption>{{ page.image_caption | escape }} {% if page.image_source %}<a href="{{ page.image_source | escape }}">{{ page.image_credit | escape }}</a>{% endif %}</figcaption>{% endif %}
+      </figure>
+    {% endif %}
+  </header>
+  {% assign headings = content | split: '<h2 id="' %}
+  <div class="reading{% if headings.size > 1 %} with-contents{% endif %}">
+    {% if headings.size > 1 %}
+    <aside class="contents">
+      <details open>
+        <summary>Contents</summary>
+        <nav aria-label="Article contents">
+          {% for heading in headings offset:1 %}
+            {% assign anchor = heading | split: '"' | first %}
+            {% assign label = heading | split: '</h2>' | first | split: '">' | last | strip_html %}
+            <a href="#{{ anchor }}">{{ label }}</a>
+          {% endfor %}
+        </nav>
+      </details>
+    </aside>
+    {% endif %}
+    <div class="prose">{{ content }}</div>
+  </div>
+</article>
+<script>
+  const menu = document.querySelector('.contents details');
+  if (menu && window.matchMedia('(max-width: 760px)').matches) menu.open = false;
+</script>

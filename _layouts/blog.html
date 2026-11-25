@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | escape }} · Tianang Leng</title>
+  <meta name="description" content="{{ page.description | escape }}">
+  <meta name="author" content="Tianang Leng">
+  <link rel="canonical" href="https://tianangleng.github.io{{ page.url }}">
+  <meta property="og:title" content="{{ page.title | escape }}">
+  <meta property="og:description" content="{{ page.description | escape }}">
+  <meta property="og:url" content="https://tianangleng.github.io{{ page.url }}">
+  <meta property="og:type" content="{% if page.collection == 'posts' %}article{% else %}website{% endif %}">
+  {% if page.image %}<meta property="og:image" content="https://tianangleng.github.io{{ page.image }}">{% endif %}
+  <link rel="icon" href="/Apple%20ID.pic.jpg">
+  <script>
+    if (location.hostname === 'dragondescentzerotsu.github.io') {
+      location.replace('https://tianangleng.github.io' + location.pathname + location.search + location.hash);
+    }
+    try {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark' || saved === 'light') document.documentElement.style.colorScheme = saved;
+    } catch {}
+  </script>
+  <link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead frame">
+    <a class="signature" href="/">Tianang Leng</a>
+    <nav aria-label="Site navigation">
+      <a href="/">Homepage</a>
+      <a href="/blog/" {% if page.url == '/blog/' %}aria-current="page"{% else %}aria-current="location"{% endif %}>Blog</a>
+    </nav>
+  </header>
+  <main id="main" class="frame">{{ content }}</main>
+  <footer class="frame foot"><a href="/">Tianang Leng</a><a href="/blog/">All articles <span aria-hidden="true">↗</span></a></footer>
+</body>
+</html>

@@ -1,0 +1,25 @@
+---
+layout: blog
+title: Blog
+description: Essays and reading notes by Tianang Leng.
+permalink: /blog/
+---
+<header class="archive-head">
+  <h1>Blog</h1>
+  <p class="deck">{{ page.description }}</p>
+</header>
+<ul class="archive">
+  {% for post in site.posts %}
+  <li>
+    <a class="entry" href="{{ post.url }}">
+      <div class="entry-copy">
+        <p class="meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>{% if post.topic %}<span>·</span>{{ post.topic | escape }}{% endif %}</p>
+        <h2>{{ post.title | escape }}</h2>
+        {% if post.description %}<p class="entry-description">{{ post.description | escape }}</p>{% endif %}
+      </div>
+      {% if post.image %}<div class="thumb"><img src="{{ post.image | escape }}" alt=""></div>{% endif %}
+      <span class="entry-arrow" aria-hidden="true">↗</span>
+    </a>
+  </li>
+  {% endfor %}
+</ul>
